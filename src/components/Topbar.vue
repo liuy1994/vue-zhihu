@@ -1,10 +1,13 @@
 <template>
   <div class="topbar">
-      <img src="../assets/img/top_logo.png" alt="logo">
+    <section>
+      <a href=""><img src="../assets/img/top_logo.png" alt="logo"></a>
       <div class="buttons">
           <a href="/123"><span class="app">App 下载</span></a>
           <a href="/321"><span>浏览内容</span></a>
       </div>
+    </section>
+      
   </div>
 </template>
 
@@ -15,38 +18,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .topbar{
-    display:flex;
+.topbar {    
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width:100%;
+  background: #fff;
+  section{
+    height: 78px;    
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top:0;
-    left: 0;
-    right:0;
-    height: 78px;
-    width:960px;
-    margin:0 auto;
-    img{
+    width: 960px;
+    margin: 0 auto;
+    img {
       height: 60px;
     }
-    .buttons{
+    .buttons {
       display: flex;
-      a{
+      a {
         display: block;
-        width:140px;
+        width: 140px;
         line-height: 78px;
         text-align: center;
-        span{
+        span {
           padding: 10px;
         }
-        span.app{
+        span.app {
           background: #f0f9ff;
           color: #008bed;
           border-radius: 3px;
         }
       }
     }
-    
-
   }
+
+  
+
+
+}
 </style>
