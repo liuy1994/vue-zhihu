@@ -1,7 +1,7 @@
 <template>
   <div class="topbar">
     <section>
-      <a href=""><img src="../assets/img/top_logo.png" alt="logo"></a>
+      <a href=""><img src="../../static/top_logo.png" alt="logo"></a>
       <div class="buttons">
           <a href="/123"><span class="app">App 下载</span></a>
           <a href="/321"><span>浏览内容</span></a>

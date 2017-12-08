@@ -1,7 +1,7 @@
 <template>
   <div class="download">
       <section>
-          <img src="../assets/img/phone_sample.png" alt="mobile">
+          <img src="../../static/phone_sample.png" alt="mobile">
           <div class="loaded">
             <h2>每天三次 每次七分钟</h2>
             <p>在中国，资讯类移动应用的人均阅读时长是 5 分钟，而</p>
