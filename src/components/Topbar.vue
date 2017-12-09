@@ -25,6 +25,7 @@ export default {
   right: 0;
   width:100%;
   background: #fff;
+  z-index: 10;
   section{
     height: 78px;    
     display: flex;
