@@ -6,7 +6,7 @@
       console.log('成功')
     }
   }
-  ajax.open('GET', '/api/4/news/latest')
+  ajax.open('GET', 'http://173.213.88.44:8080/api/4/news/latest')
   ajax.send()
   console.log(123)
 })()
