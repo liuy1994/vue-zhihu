@@ -6,6 +6,7 @@
 
 <script>
 import './assets/reset.css'
+import './assets/ajax.js'
 
 export default {
   name: 'App'
