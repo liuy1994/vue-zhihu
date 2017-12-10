@@ -2,17 +2,16 @@
   <div class="zhihu">
     <Topbar></Topbar>
     <Download></Download>
-    <Content></Content>
-    <Footer></Footer>
-    <div style="width:100px;height:120vh;background:red;"></div>
+    <Mycontent></Mycontent>
+    <Myfooter></Myfooter>
   </div>
 </template>
 
 <script>
   import Topbar from './Topbar'
   import Download from './Download'
-  import Content from './Content'
-  import Footer from './Footer'
+  import Mycontent from './Mycontent'
+  import Myfooter from './Myfooter'
   export default {
     name: 'Zhihu',
     data () {
@@ -20,14 +19,13 @@
       }
     },
     components: {
-      Topbar, Download, Content,Footer
+      Topbar, Download, Mycontent, Myfooter
     }
 }
 </script>
 
 <style lang="scss" scoped>
   .zhihu{
-    border:1px solid red;
     position: relative;
   }
 </style>

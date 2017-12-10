@@ -28,13 +28,14 @@
 
 <script>
 export default {
-  name: "Content"
+  name: 'Mycontent'
 }
 </script>
 
 <style lang="scss" scoped>
   .content {
     background: #f9f9f9;
+    padding-bottom:30px;
     .head {
       display: flex;
       justify-content: space-between;
