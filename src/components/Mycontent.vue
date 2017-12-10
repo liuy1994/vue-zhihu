@@ -5,15 +5,15 @@
           <div class="latest">最新内容</div>
       </div>
       <section>
-        <a :href="'123345' + date" v-for="(item,index) in data">
+        <a v-for="item in data" :href="'https://daily.zhihu.com/story/' + item.id">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </a>
-        <a :href="'123345' + date" v-for="(item,index) in oldData">
+        <a v-for="item in oldData" :href="'https://daily.zhihu.com/story/' + item.id">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </a>
-        <a :href="'123345' + date" v-for="(item,index) in oldest">
+        <a v-for="item in oldest" :href="'https://daily.zhihu.com/story/' + item.id">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </a>
@@ -39,11 +39,10 @@ export default {
     }
   },
   created: function () {
-    console.log(1234)
     var that = this
-
     var today = new Date()
-    console.log('' + today.getFullYear() + (today.getMonth() + 1) + today.getDate())
+    var date = '' + today.getFullYear() + (today.getMonth() + 1) + today.getDate()
+    this.date = date
 
     var ajax1 = new XMLHttpRequest()
     ajax1.onreadystatechange = function (res) {
@@ -69,7 +68,7 @@ export default {
         }
       }
     }
-    ajax2.open('GET', 'http://173.213.88.44:8080/api/4/news/before/20171210', true)
+    ajax2.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + this.date, true)
     ajax2.send()
 
     var ajax3 = new XMLHttpRequest()
@@ -80,10 +79,9 @@ export default {
           var oldest = result3.stories
           that.oldest = oldest
         }
-        console.log(that.oldData)
       }
     }
-    ajax3.open('GET', 'http://173.213.88.44:8080/api/4/news/before/20171210', true)
+    ajax3.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + (this.date - 1), true)
     ajax3.send()
   }
 }
