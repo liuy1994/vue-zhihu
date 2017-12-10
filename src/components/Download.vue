@@ -3,37 +3,32 @@
       <section>
           <img src="../../static/phone_sample.png" alt="mobile">
           <div class="loaded">
-            
             <h2>每天三次 每次七分钟</h2>
             <p>在中国，资讯类移动应用的人均阅读时长是 5 分钟，而</p>
             <p>在知乎日报，这个数字是 21。</p>
-            
-            
-            <div class="qr-top">
-              <img src="../../static/qr_top2.png" alt="二维码">
-            </div>
             <div class="app-download">
+              <div class="qr-top">
+                <img src="../../static/qr_top2.png" alt="二维码">
+              </div>
               <ul>
-                <li><a href="" class="iphone">iOS 版</a></li>
-                <li><a href="" class="andriod">Andriod 版</a></li>
+                <li><a href=""><img class="iphone" src="../../static/iphone_logo.png" alt="iphone"><span>iOS 版</span></a></li>
+                
+                <li><a href=""><img class="andriod" src="../../static/android_logo.png" alt="android"><span>Andriod 版</span></a></li>
               </ul>
             </div>
-          
-            
           </div>
       </section>
   </div>
 </template>
 
-<script lang="scss" scoped>
-export default {
-  name: 'Download'
-}
+<script>
+  export default {
+    name: 'Download'
+  }
 </script>
 
 <style lang="scss" scoped>
   .download{
-    border:1px solid black;
     margin-top:78px;
     height: 460px;
     width:100%;
@@ -49,7 +44,7 @@ export default {
       }
       .loaded{
         float:right;
-        margin-right: 30px;
+        margin-right: 20px;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -66,17 +61,43 @@ export default {
           font-size: 16px;
           line-height: 26px;
         }
-        .qr-top{
+      }
+        .app-download{
+          display: flex;
           margin-top: 48px;
-          background: white;
-          width:145px;
-          border-radius:3px;
-          height: 153px;
-          >img{
-            margin:9px 0 0 5px;
+          .qr-top{
+            background: white;
+            width:145px;
+            border-radius:3px;
+            height: 153px;
+            >img{
+              margin:9px 0 0 5px;
+            }
+          }
+          ul{
+            margin-left:55px;
+            li{
+              margin-bottom: 20px;
+              line-height: 65px;
+              a{
+                display: block;
+                background: white;
+                border-radius: 5px;
+                padding-right: 35px;
+                img{
+                  color:red;
+                  vertical-align: middle;
+                  padding-left: 6px;
+                }
+                span{
+                  padding-left: 10px;
+                  font-size: 20px;
+                }
+              }
+            }
+
           }
         }
-      }
     }
   }
 </style>
