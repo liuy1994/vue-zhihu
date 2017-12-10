@@ -52,7 +52,6 @@
       margin:0 auto;
       position: relative;
       overflow: hidden;
-      position: relative;
       .mobile-appear-active{
         transition: all 1s ease;
       }
@@ -77,8 +76,6 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        position: relative;
-        z-index: 10;
         h2{
           margin-top: 100px;
           line-height: 40px;
