@@ -14,7 +14,7 @@
       <h1>{{title}}</h1>
     </div>
     <div class="myContent">
-      加载中......
+      <h1 class="loading">加载中......</h1>
     </div>
     <div class="about">
       <h2 class="heading">扫描二维码下载知乎日报</h2>
@@ -107,6 +107,8 @@ export default {
     margin: 0 auto;
     position: relative;
     top:-100px;
+    height: 720px;
+    background: #fff;
     img{
       width:100%;
     }
@@ -123,8 +125,14 @@ export default {
     background:white;
     padding:40px;
     width: 720px;
+    min-height: 150px;
     margin:-120px auto;
     line-height: 36px;
+    position: relative;
+    h1.loading{
+      position: absolute;
+      top:-450px;
+    }
   }
   .about{
     margin: 130px auto 0;
