@@ -5,18 +5,18 @@
           <div class="latest">最新内容</div>
       </div>
       <section>
-        <a v-for="item in data" :href="'https://daily.zhihu.com/story/' + item.id">
+        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
-        </a>
-        <a v-for="item in oldData" :href="'https://daily.zhihu.com/story/' + item.id">
+        </router-link>
+        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
-        </a>
-        <a v-for="item in oldest" :href="'https://daily.zhihu.com/story/' + item.id">
+        </router-link>
+        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
-        </a>
+        </router-link>
 
       </section>
       <a href="">
