@@ -1,8 +1,27 @@
 <template>
   <div class="detail">
+    <div class="topbar">
+      <section>
+        <a href=""><img src="../../static/Web_logo.png" alt="logo"></a>
+        <div class="buttons">
+            <a href="#"><span class="app">iPhone</span></a>
+            <a href="#"><span>Android</span></a>
+        </div>
+      </section>
+    </div>
+    <div class="title">
+      <img :src="this.image" alt="big_picture">
+      <h1>{{title}}</h1>
+    </div>
     <div class="myContent">
       加载中......
     </div>
+    <div class="about">
+      <h2 class="heading">扫描二维码下载知乎日报</h2>
+      <span class="subheading">支持 iOS 和 Android</span>        
+      <img src="../../static/qr_bottom.png" alt="二维码下载知乎日报" width="148" height="148">
+    </div>
+    <div class="info">知乎网 @2017 知乎</div>
   </div>
 </template>
 
@@ -11,7 +30,8 @@ export default {
   name: 'Detail',
   data () {
     return {
-      body: ''
+      image: '',
+      title: ''
     }
   },
   created () {
@@ -25,12 +45,15 @@ export default {
       if (ajax1.readyState === 4) {
         if (ajax1.status === 200) {
           var result = JSON.parse(ajax1.responseText)
-          console.log(result)
+          var image = result.image.replace(/http\w{0,1}:\/\//g, 'https://images.weserv.nl/?url=')
+          that.image = image
+          that.title = result.title
           var body = result.body
-          that.body = body
           var myContent = document.getElementsByClassName('myContent')[0]
-          console.log(myContent)
-          myContent.innerHTML = that.body
+          myContent.innerHTML = body
+          var avatar = document.getElementsByClassName('avatar')[0]
+          var src = avatar.getAttribute('src').replace(/http\w{0,1}:\/\//g, 'https://images.weserv.nl/?url=')
+          avatar.setAttribute('src', src)
         }
       }
     }
@@ -41,7 +64,85 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+*{
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+}
 .detail {
+  background: #f6f6f6;
   position: relative;
+  .topbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width:100%;
+    z-index: 10;
+    background: #009dd7;
+    section{
+      height: 56px;    
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 720px;
+      margin: 0 auto;      
+      .buttons {
+        display: flex;
+        a{
+          display: block;
+          width: 100px;
+          margin-left: 20px;;
+          line-height: 36px;
+          text-align: center;
+          border-radius: 3px;
+          background: #1cade9;
+          color:white;
+        }
+      }
+    }
+  }
+  .title{
+    width:720px;
+    margin: 0 auto;
+    position: relative;
+    top:-100px;
+    img{
+      width:100%;
+    }
+    h1{
+      font-size: 30px;
+      line-height: 36px;
+      padding:0 80px;
+      color:white;
+      position: absolute;
+      bottom:50px;
+    }
+  }
+  .myContent{
+    background:white;
+    padding:40px;
+    width: 720px;
+    margin:-120px auto;
+    line-height: 36px;
+  }
+  .about{
+    margin: 130px auto 0;
+    background: #fff;
+    width:720px;
+    height:270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding:20px;
+  }
+  .info{
+    width:100%;
+    line-height: 80px;
+    font-size: 13px;
+    text-align: center;
+    color:#b8b8b8;
+  }
 }
 </style>
