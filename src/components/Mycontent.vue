@@ -5,19 +5,18 @@
           <div class="latest">最新内容</div>
       </div>
       <section>
-        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
+        <router-link v-for="(item,index) in data" :key="item.id" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </router-link>
-        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
+        <router-link v-for="(item,index) in oldData" :key="item.id" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </router-link>
-        <router-link v-for="(item,index) in data" :key="index" :to="{path:'/detail?' + item.id}">
+        <router-link v-for="(item,index) in oldest" :key="item.id" :to="{path:'/detail?' + item.id}">
           <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
           <p>{{item.title}}</p>
         </router-link>
-
       </section>
       <a href="">
         <div class="footer">
@@ -39,17 +38,20 @@ export default {
     }
   },
   created: function () {
-    var that = this
-    var today = new Date()
-    var date = '' + today.getFullYear() + (today.getMonth() + 1) + today.getDate()
-    this.date = date
+    let that = this
+    let year = new Date().getFullYear()
+    let month = new Date().getMonth()
+    let day = new Date().getDate() + 1
+    month = month > 9 ? month : '0' + month
+    day = day > 9 ? day : '0' + day
+    that.date = '' + year + month + day
 
-    var ajax1 = new XMLHttpRequest()
+    let ajax1 = new XMLHttpRequest()
     ajax1.onreadystatechange = function (res) {
       if (ajax1.readyState === 4) {
         if (ajax1.status === 200) {
-          var result = JSON.parse(ajax1.responseText)
-          var { date, stories } = result
+          let result = JSON.parse(ajax1.responseText)
+          let { date, stories } = result
           that.date = date
           that.data = stories
         }
@@ -58,30 +60,28 @@ export default {
     ajax1.open('GET', 'http://173.213.88.44:8080/api/4/news/latest', true)
     ajax1.send()
 
-    var ajax2 = new XMLHttpRequest()
+    let ajax2 = new XMLHttpRequest()
     ajax2.onreadystatechange = function (res) {
       if (ajax2.readyState === 4) {
         if (ajax2.status === 200) {
-          var result2 = JSON.parse(ajax2.responseText)
-          var oldStories = result2.stories
-          that.oldData = oldStories
+          let result2 = JSON.parse(ajax2.responseText)
+          that.oldData = result2.stories
         }
       }
     }
-    ajax2.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + this.date, true)
+    ajax2.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + that.date, true)
     ajax2.send()
 
-    var ajax3 = new XMLHttpRequest()
+    let ajax3 = new XMLHttpRequest()
     ajax3.onreadystatechange = function (res) {
       if (ajax3.readyState === 4) {
         if (ajax3.status === 200) {
-          var result3 = JSON.parse(ajax3.responseText)
-          var oldest = result3.stories
-          that.oldest = oldest
+          let result3 = JSON.parse(ajax3.responseText)
+          that.oldest = result3.stories
         }
       }
     }
-    ajax3.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + (this.date - 1), true)
+    ajax3.open('GET', 'http://173.213.88.44:8080/api/4/news/before/' + (that.date - 1), true)
     ajax3.send()
   }
 }

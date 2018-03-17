@@ -18,7 +18,7 @@
     </div>
     <div class="about">
       <h2 class="heading">扫描二维码下载知乎日报</h2>
-      <span class="subheading">支持 iOS 和 Android</span>        
+      <span class="subheading">支持 iOS 和 Android</span>
       <img src="../../static/qr_bottom.png" alt="二维码下载知乎日报" width="148" height="148">
     </div>
     <div class="info">知乎网 @2017 知乎</div>
@@ -34,25 +34,29 @@ export default {
       title: ''
     }
   },
+  updated () {
+    window.scroll(0, 0)
+  },
   created () {
-    var that = this
-    var url = window.location.href
-    var index = url.indexOf('?')
-    var id = url.substr(index + 1)
+    let that = this
+    let url = window.location.href
+    let index = url.indexOf('?')
+    let id = url.substr(index + 1)
 
-    var ajax1 = new XMLHttpRequest()
+    let ajax1 = new XMLHttpRequest()
     ajax1.onreadystatechange = function (res) {
       if (ajax1.readyState === 4) {
         if (ajax1.status === 200) {
-          var result = JSON.parse(ajax1.responseText)
-          var image = result.image.replace(/http\w{0,1}:\/\//g, 'https://images.weserv.nl/?url=')
+          let result = JSON.parse(ajax1.responseText)
+          let image = result.image.replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
           that.image = image
           that.title = result.title
-          var body = result.body
-          var myContent = document.getElementsByClassName('myContent')[0]
+          let body = result.body
+          body.replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
+          let myContent = document.getElementsByClassName('myContent')[0]
           myContent.innerHTML = body
-          var avatar = document.getElementsByClassName('avatar')[0]
-          var src = avatar.getAttribute('src').replace(/http\w{0,1}:\/\//g, 'https://images.weserv.nl/?url=')
+          let avatar = document.getElementsByClassName('avatar')[0]
+          let src = avatar.getAttribute('src').replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
           avatar.setAttribute('src', src)
         }
       }
@@ -81,12 +85,12 @@ export default {
     z-index: 10;
     background: #009dd7;
     section{
-      height: 56px;    
+      height: 56px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 720px;
-      margin: 0 auto;      
+      margin: 0 auto;
       .buttons {
         display: flex;
         a{
