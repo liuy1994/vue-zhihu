@@ -4,8 +4,8 @@
       <section>
         <a href=""><img src="../../static/Web_logo.png" alt="logo"></a>
         <div class="buttons">
-            <a href="#"><span class="app">iPhone</span></a>
-            <a href="#"><span>Android</span></a>
+          <a href="#"><span class="app">iPhone</span></a>
+          <a href="#"><span>Android</span></a>
         </div>
       </section>
     </div>
@@ -26,135 +26,132 @@
 </template>
 
 <script>
-export default {
-  name: 'Detail',
-  data () {
-    return {
-      image: '',
-      title: ''
-    }
-  },
-  updated () {
-    window.scroll(0, 0)
-  },
-  created () {
-    let that = this
-    let url = window.location.href
-    let index = url.indexOf('?')
-    let id = url.substr(index + 1)
+  import AJAXService from '@/service/ajax.js'
 
-    let ajax1 = new XMLHttpRequest()
-    ajax1.onreadystatechange = function (res) {
-      if (ajax1.readyState === 4) {
-        if (ajax1.status === 200) {
-          let result = JSON.parse(ajax1.responseText)
-          let image = result.image.replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
-          that.image = image
-          that.title = result.title
-          let body = result.body
+  export default {
+    name: 'Detail',
+    data () {
+      return {
+        image: '',
+        title: ''
+      }
+    },
+    updated () {
+      window.scroll(0, 0)
+      console.log('请忽略跨域图片错误，暂时还没有解决')
+    },
+    methods: {
+      getDetail () {
+        AJAXService.getContent('9669101').then((data) => {
+          this.image = data.image.replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
+          this.title = data.title
+          let body = data.body
           body.replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
           let myContent = document.getElementsByClassName('myContent')[0]
           myContent.innerHTML = body
           let avatar = document.getElementsByClassName('avatar')[0]
           let src = avatar.getAttribute('src').replace(/http\w{0,1}:\/\/pic/g, 'https://images.weserv.nl/?url=pic')
           avatar.setAttribute('src', src)
-        }
+        }, (msg) => {
+          alert(msg.error_message)
+        })
       }
+    },
+    mounted () {
+      this.getDetail()
     }
-    ajax1.open('GET', 'http://173.213.88.44:8080/api/4/news/' + id, true)
-    ajax1.send()
   }
-}
 </script>
 
 <style lang="scss" scoped>
-*{
-  box-sizing: border-box;
-  padding:0;
-  margin:0;
-}
-.detail {
-  background: #f6f6f6;
-  position: relative;
-  .topbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width:100%;
-    z-index: 10;
-    background: #009dd7;
-    section{
-      height: 56px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 720px;
-      margin: 0 auto;
-      .buttons {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  .detail {
+    background: #f6f6f6;
+    position: relative;
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 10;
+      background: #009dd7;
+      section {
+        height: 56px;
         display: flex;
-        a{
-          display: block;
-          width: 100px;
-          margin-left: 20px;;
-          line-height: 36px;
-          text-align: center;
-          border-radius: 3px;
-          background: #1cade9;
-          color:white;
+        justify-content: space-between;
+        align-items: center;
+        width: 720px;
+        margin: 0 auto;
+        .buttons {
+          display: flex;
+          a {
+            display: block;
+            width: 100px;
+            margin-left: 20px;;
+            line-height: 36px;
+            text-align: center;
+            border-radius: 3px;
+            background: #1cade9;
+            color: white;
+          }
         }
       }
     }
-  }
-  .title{
-    width:720px;
-    margin: 0 auto;
-    position: relative;
-    top:-100px;
-    height: 720px;
-    background: #fff;
-    img{
-      width:100%;
+    .title {
+      width: 720px;
+      margin: 0 auto;
+      position: relative;
+      top: -100px;
+      height: 720px;
+      background: #fff;
+      img {
+        width: 100%;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 36px;
+        padding: 0 80px;
+        color: white;
+        position: absolute;
+        bottom: 50px;
+      }
     }
-    h1{
-      font-size: 30px;
+    .myContent {
+      background: white;
+      padding: 40px;
+      width: 720px;
+      min-height: 150px;
+      margin: -120px auto;
       line-height: 36px;
-      padding:0 80px;
-      color:white;
-      position: absolute;
-      bottom:50px;
+      position: relative;
+      h1.loading {
+        position: absolute;
+        top: -450px;
+      }
+    }
+    .about {
+      margin: 130px auto 0;
+      background: #fff;
+      width: 720px;
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+    }
+    .info {
+      width: 100%;
+      line-height: 80px;
+      font-size: 13px;
+      text-align: center;
+      color: #b8b8b8;
     }
   }
-  .myContent{
-    background:white;
-    padding:40px;
-    width: 720px;
-    min-height: 150px;
-    margin:-120px auto;
-    line-height: 36px;
-    position: relative;
-    h1.loading{
-      position: absolute;
-      top:-450px;
-    }
-  }
-  .about{
-    margin: 130px auto 0;
-    background: #fff;
-    width:720px;
-    height:270px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding:20px;
-  }
-  .info{
-    width:100%;
-    line-height: 80px;
-    font-size: 13px;
-    text-align: center;
-    color:#b8b8b8;
-  }
-}
 </style>
