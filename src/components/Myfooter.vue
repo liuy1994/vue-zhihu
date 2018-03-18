@@ -24,10 +24,12 @@
 
 <style lang="scss" scoped>
     .footer {
-      background: #e5e5e5;
       color:#666;
       .more{
+        background: #e5e5e5;
         width:960px;
+        box-sizing: border-box;
+        padding:0 20px;
         height: 265px;
         margin:0 auto;
         display: flex;

@@ -74,14 +74,13 @@
 
 <style lang="scss" scoped>
   .content {
-    background: #f9f9f9;
-    padding-bottom: 30px;
     .head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 0 auto;
-      width: 960px;
+      width: 920px;
+      padding:0 20px;
       div {
         line-height: 100px;
         font-size: 24px;
@@ -92,7 +91,7 @@
     }
     section {
       margin: 0 auto;
-      padding-left: 20px;
+      background: #f9f9f9;
       width: 960px;
       height: 3900px;
       display: flex;
@@ -119,13 +118,12 @@
     }
 
     .footer {
-      background: #e8eef2;
       color: #15527b;
       line-height: 62px;
       text-align: center;
-      margin-top: 30px;
       margin: 0 auto;
       width: 960px;
+      background: #f9f9f9;
     }
   }
 </style>
