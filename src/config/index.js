@@ -1,5 +1,5 @@
 export default {
   api: {
-    service: '/api/4/news/'
+    service: 'http://47.52.234.164:2334/api/4/news/'
   }
 }
