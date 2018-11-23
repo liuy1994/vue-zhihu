@@ -9,7 +9,7 @@
         <p>© 2017 知乎</p>
       </div>
       <div class="qr-bottom">
-        <img src="//p0qsnkkty.bkt.clouddn.com/qr_bottom.png" alt="qr-bottom">
+        <img src="../../static/qr_bottom.png" alt="qr-bottom">
       </div>
 
     </div>

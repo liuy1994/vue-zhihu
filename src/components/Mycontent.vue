@@ -5,16 +5,8 @@
       <div class="latest">最新内容</div>
     </div>
     <section>
-      <router-link v-for="(item,index) in data" :key="item.id" :to="{path:'/detail?' + item.id}">
-        <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
-        <p>{{item.title}}</p>
-      </router-link>
-      <router-link v-for="(item,index) in oldData" :key="item.id" :to="{path:'/detail?' + item.id}">
-        <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
-        <p>{{item.title}}</p>
-      </router-link>
-      <router-link v-for="(item,index) in oldest" :key="item.id" :to="{path:'/detail?' + item.id}">
-        <img :src="item.images[0].replace(/http\w{0,1}:\/\//g,'https://images.weserv.nl/?url=')" alt="tup">
+      <router-link v-for="item in data" :key="item.id" :to="{path:'/detail?' + item.id}">
+        <img :src="item.images[0]" alt="tup">
         <p>{{item.title}}</p>
       </router-link>
     </section>
@@ -33,41 +25,32 @@
     name: 'Mycontent',
     data () {
       return {
-        data: '',
-        oldData: '',
-        oldest: ''
+        data: []
       }
     },
     methods: {
-      getNow () {
-        AJAXService.getContent('latest').then((data) => {
-          this.data = data.stories
-        }, (msg) => {
-          alert(msg.error_message)
-        })
-      },
-      getOld () {
+      getList () {
         let year = new Date().getFullYear()
         let month = new Date().getMonth()
         let day = new Date().getDate() + 1
         month = month > 9 ? month : '0' + month
         day = day > 9 ? day : '0' + day
         let date = '' + year + month + day
-        AJAXService.getContent('before/' + date).then((data) => {
-          this.oldData = data.stories
-        }, (msg) => {
-          alert(msg.error_message)
-        })
-        AJAXService.getContent('before/' + (parseInt(date) - 1)).then((data) => {
-          this.oldest = data.stories
+        let arr = [AJAXService.getContent('latest'), AJAXService.getContent('before/' + date), AJAXService.getContent('before/' + (parseInt(date) - 1))]
+        Promise.all(arr).then(data => {
+          if (data.length) {
+            let latest = data[0] ? data[0].stories : []
+            let old = data[1] ? data[1].stories : []
+            let oldest = data[2] ? data[2].stories : []
+            this.data = [...latest, ...old, ...oldest]
+          }
         }, (msg) => {
           alert(msg.error_message)
         })
       }
     },
     mounted () {
-      this.getNow()
-      setTimeout(this.getOld(), 4)
+      this.getList()
     }
   }
 </script>

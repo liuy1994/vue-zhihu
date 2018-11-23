@@ -7,7 +7,7 @@
         appear-to-class="mobile-appear-to"
         appear-active-class="mobile-appear-active"
       >
-        <img src="//p0qsnkkty.bkt.clouddn.com/phone_sample.png" alt="mobile">
+        <img src="../../static/phone_sample.png" alt="mobile">
       </transition>
       <transition
         appear
@@ -21,11 +21,11 @@
           <p>在知乎日报，这个数字是 21。</p>
           <div class="app-download">
             <div class="qr-top">
-              <img src="//p0qsnkkty.bkt.clouddn.com/qr_top2.png" alt="二维码">
+              <img src="../../static/qr_top2.png" alt="二维码">
             </div>
             <ul>
-              <li><a class="iphone" href="#"><img src="//p0qsnkkty.bkt.clouddn.com/iphone_logo.png" alt="iphone"><span>iOS 版</span></a></li>
-              <li><a class="andriod" href="#"><img src="//p0qsnkkty.bkt.clouddn.com/android_logo.png" alt="android"><span>Andriod 版</span></a></li>
+              <li><a class="iphone" href="#"><img src="../../static/iphone_logo.png" alt="iphone"><span>iOS 版</span></a></li>
+              <li><a class="andriod" href="#"><img src="../../static/android_logo.png" alt="android"><span>Andriod 版</span></a></li>
             </ul>
           </div>
         </div>
@@ -44,7 +44,8 @@
   .download{
     margin-top:78px;
     height: 460px;
-    width:100%;
+    width: 100%;
+    min-width:960px;
     background: #008bed;
     section{
       width:960px;
@@ -56,7 +57,7 @@
         transition: all 1s ease;
       }
       .mobile-appear{
-        margin-top: 440px;
+        margin-top: 540px;
       }
 
       .loaded-appear-active{
