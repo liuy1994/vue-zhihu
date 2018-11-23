@@ -5,7 +5,7 @@
       <div class="latest">最新内容</div>
     </div>
     <section>
-      <router-link v-for="item in data" :key="item.id" :to="{path:'/detail?' + item.id}">
+      <router-link v-for="item in data" :key="item.id" :to="{path:'/detail/' + item.id}">
         <img :src="item.images[0]" alt="tup">
         <p>{{item.title}}</p>
       </router-link>

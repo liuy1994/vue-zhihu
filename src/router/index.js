@@ -13,7 +13,7 @@ export default new Router({
       component: Zhihu
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'Detail',
       component: Detail
     }
