@@ -16,11 +16,11 @@
     <div class="myContent">
       <h1 class="loading">加载中......</h1>
     </div>
-    <div class="about">
-      <h2 class="heading">扫描二维码下载知乎日报</h2>
-      <span class="subheading">支持 iOS 和 Android</span>
-      <img src="../../static/qr_bottom.png" alt="二维码下载知乎日报" width="148" height="148">
-    </div>
+    <!--<div class="about">-->
+      <!--<h2 class="heading">扫描二维码下载知乎日报</h2>-->
+      <!--<span class="subheading">支持 iOS 和 Android</span>-->
+      <!--<img src="../../static/qr_bottom.png" alt="二维码下载知乎日报" width="148" height="148">-->
+    <!--</div>-->
     <div class="info">知乎网 @2017 知乎</div>
   </div>
 </template>

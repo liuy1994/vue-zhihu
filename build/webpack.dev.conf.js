@@ -30,10 +30,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ? { warnings: false, errors: true }
       : false,
     publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
+    // proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    proxy: {
+      '/api': {    // 设置请求前增加的值，这个值会代替我们的网址进行请求
+        // target: 'http://192.168.89.88:8986',    // 有多个后端的时候，注释可以方便切换
+        target: 'http://news-at.zhihu.com',    // 这个就是我们设置的代理服务器地址
+        changeOrigin: true                    // 这个值就是用来跨域的，默认为false
+        // pathRewrite: {'^/apis': 'apis'}        // 实现替换的，将apis替换成apis,也可以设置为空
+      }
     }
   },
   plugins: [

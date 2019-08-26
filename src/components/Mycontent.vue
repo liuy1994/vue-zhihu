@@ -5,7 +5,7 @@
       <div class="latest">最新内容</div>
     </div>
     <section>
-      <router-link v-for="item in data" :key="item.id" :to="{path:'/detail/' + item.id}">
+      <router-link v-for="(item, index) in data" :key="`${item.id}-${index}`" :to="{path:'/detail/' + item.id}">
         <img :src="item.images[0]" alt="tup">
         <p>{{item.title}}</p>
       </router-link>
@@ -29,24 +29,63 @@
       }
     },
     methods: {
-      getList () {
-        let year = new Date().getFullYear()
-        let month = new Date().getMonth()
-        let day = new Date().getDate() + 1
+      getDate (date) {
+        date = date ? new Date(date) : new Date()
+        let year = date.getFullYear()
+        let month = date.getMonth() + 1
+        let day = date.getDate()
         month = month > 9 ? month : '0' + month
         day = day > 9 ? day : '0' + day
-        let date = '' + year + month + day
-        let arr = [AJAXService.getContent('latest'), AJAXService.getContent('before/' + date), AJAXService.getContent('before/' + (parseInt(date) - 1))]
+        return '' + year + month + day
+      },
+      getList () {
+        // let year = new Date().getFullYear()
+        // let month = new Date().getMonth() + 1
+        // let day = new Date().getDate()
+        // month = month > 9 ? month : '0' + month
+        // day = day > 9 ? day : '0' + day
+        // let date = '' + year + month + day
+        let today = new Date().getTime()
+        let arr = [
+          AJAXService.getContent('latest'),
+          AJAXService.getContent('before/' + this.getDate(today)),
+          AJAXService.getContent('before/' + this.getDate(today - 24 * 60 * 60 * 1000))
+        ]
         Promise.all(arr).then(data => {
           if (data.length) {
-            let latest = data[0] ? data[0].stories : []
+            data[0] = data[0]
+              ? {
+                stories: data[0].stories,
+                top_stories: data[0].top_stories.map(t => {
+                  return {
+                    ...t,
+                    images: [t.image]
+                  }
+                })
+              }
+              : {
+                stories: [],
+                top_stories: []
+              }
+            let latest = data[0] ? [...data[0].stories, ...data[0].top_stories] : []
             let old = data[1] ? data[1].stories : []
             let oldest = data[2] ? data[2].stories : []
             this.data = [...latest, ...old, ...oldest]
+            this.getFinal(today - 24 * 60 * 60 * 1000)
           }
         }, (msg) => {
           alert(msg.error_message)
         })
+      },
+      getFinal (final) {
+        if (this.data.length < 30) {
+          AJAXService.getContent('before/' + this.getDate(final - 24 * 60 * 60 * 1000)).then(data => {
+            this.data = this.data.concat(data.stories || [])
+            this.getFinal(final - 24 * 60 * 60 * 1000)
+          })
+        } else {
+          this.data = this.data.slice(0, 30)
+        }
       }
     },
     mounted () {
